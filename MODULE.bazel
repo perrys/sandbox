@@ -1,0 +1,15 @@
+module(
+    name = "cpp_sandbox",
+)
+
+bazel_dep(name = "platforms", version = "0.0.10")
+# register_toolchains(
+#     "//toolchain:cc_toolchain_for_linux_x86_64"
+# )
+
+
+# https://registry.bazel.build/modules/googletest
+bazel_dep(name = "googletest", version = "1.15.2")
+
+# https://registry.bazel.build/modules/google_benchmark
+bazel_dep(name = "google_benchmark", version = "1.8.5")
