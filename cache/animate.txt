@@ -1,0 +1,38 @@
+                                                                 CPU
+L1   |                                                           |
+     |                                                           |
+     |                                                           |
+     |                                                           |
+L2   |                                                           |
+     |                                                           |
+     |                                                           |
+     |                                                           |
+     |                                                           |
+RAM  |                                                           |
+                                                                 CPU
+
+(let ((latency 0.5)
+      (start 76))
+     (run-animation latency start (+ 60 start)))
+
+(let ((latency 7.0)
+      (start 344))
+     (run-animation latency start (+ 60 start)))
+
+(let ((latency 200.0)
+      (start 679))
+     (run-animation latency start (+ 60 start)))
+
+(defun animation-frame (overlay loc delay)
+  (move-overlay overlay loc (1+ loc))
+  (sit-for delay)
+  (1+ loc))
+
+(defun run-animation (time start end)
+  (let ((loc start)
+        (an-overlay (make-overlay start start))
+        (delay (/ time (- end start))))
+    (overlay-put an-overlay 'face 'highlight)
+    (while (not (equal loc end))
+      (setq loc (animation-frame an-overlay loc delay)))
+    (delete-overlay an-overlay)))
